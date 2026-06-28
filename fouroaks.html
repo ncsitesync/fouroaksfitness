@@ -1,0 +1,2242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Four Oaks Fitness Center | Four Oaks, NC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* ─── RESET ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --yellow: #FFD700;
+      --black:  #111111;
+      --white:  #FFFFFF;
+      --gray-light: #F9F6F1;
+      --gray-mid: #555555;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Lato', sans-serif;
+      color: var(--black);
+      background: var(--white);
+      line-height: 1.6;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; }
+    ul { list-style: none; }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* ─── SCROLL MARGIN — clears fixed nav + banner ─── */
+    #hero, #stats-strip, #features, #classes, #prices, #directions,
+    #mission, #how-to-join, #supplements, #tan, #why-fo-fitness,
+    #meal-workout-plans {
+      scroll-margin-top: 80px;
+    }
+
+    /* ─── LOAD ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: var(--black);
+      height: 68px;
+      display: flex;
+      align-items: center;
+      padding: 0 40px;
+      gap: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+      animation-delay: 0s;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .nav-logo-mark {
+      background: var(--yellow);
+      color: var(--black);
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+      flex-shrink: 0;
+    }
+    .nav-logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+    .nav-logo-text strong {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 400;
+      font-size: 1.1rem;
+      color: var(--white);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .nav-logo-text small {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.7rem;
+      color: #777;
+      letter-spacing: 0.04em;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.4rem;
+      margin-left: auto;
+    }
+    .nav-links li a {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.85rem;
+      color: #bbb;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+    .nav-links li a:hover { color: var(--yellow); }
+    .nav-cta {
+      background: var(--yellow) !important;
+      color: var(--black) !important;
+      font-family: 'Oswald', sans-serif !important;
+      font-weight: 700 !important;
+      font-size: 0.9rem !important;
+      padding: 10px 22px !important;
+      border-radius: 4px !important;
+      letter-spacing: 0.05em !important;
+      box-shadow: 3px 3px 0 rgba(255,215,0,0.35) !important;
+      transition: transform 0.15s, box-shadow 0.15s !important;
+    }
+    .nav-cta:hover {
+      transform: translate(-1px,-1px) !important;
+      box-shadow: 4px 4px 0 rgba(255,215,0,0.35) !important;
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      margin-left: auto;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 68px; left: 0; right: 0;
+      background: #1a1a1a;
+      z-index: 999;
+      border-top: 1px solid #2a2a2a;
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu ul li a {
+      display: block;
+      padding: 15px 24px;
+      font-family: 'Lato', sans-serif;
+      font-size: 1rem;
+      color: #bbb;
+      border-bottom: 1px solid #222;
+      transition: color 0.2s, background 0.2s;
+    }
+    .mobile-menu ul li a:hover { color: var(--yellow); background: #222; }
+
+    /* ─── URGENCY BANNER ─── */
+    .urgency-banner {
+      position: fixed;
+      top: 68px; left: 0; right: 0;
+      z-index: 998;
+      background: var(--yellow);
+      color: var(--black);
+      text-align: center;
+      padding: 11px 1rem;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+      animation-delay: 0.1s;
+    }
+    .urgency-banner a {
+      color: var(--black);
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .urgency-banner a:hover { opacity: 0.65; }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 90vh;
+      background: var(--gray-light);
+      padding: 148px 80px 100px;
+      display: flex;
+      align-items: center;
+    }
+    #hero .hero-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 55% 45%;
+      gap: 4rem;
+      align-items: center;
+    }
+    .hero-label {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      color: #888;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+      animation-delay: 0.2s;
+    }
+    .hero-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(3.2rem, 6vw, 5.5rem);
+      font-weight: 700;
+      color: var(--black);
+      line-height: 1.0;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+      animation-delay: 0.3s;
+    }
+    .underline-accent {
+      border-bottom: 5px solid var(--yellow);
+      padding-bottom: 4px;
+    }
+    .hero-sub {
+      font-family: 'Lato', sans-serif;
+      font-size: 1.05rem;
+      color: var(--gray-mid);
+      max-width: 460px;
+      line-height: 1.7;
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+      animation-delay: 0.45s;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 0;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+      animation-delay: 0.55s;
+    }
+    .btn-join {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--yellow);
+      color: var(--black);
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 14px 32px;
+      border-radius: 4px;
+      border: 2px solid var(--black);
+      box-shadow: 4px 4px 0 var(--black);
+      letter-spacing: 0.05em;
+      transition: transform 0.15s, box-shadow 0.15s;
+      cursor: pointer;
+    }
+    .btn-join:hover {
+      transform: translate(-2px,-2px);
+      box-shadow: 6px 6px 0 var(--black);
+    }
+    .btn-explore {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--black);
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 14px 32px;
+      border-radius: 4px;
+      border: 2px solid var(--black);
+      letter-spacing: 0.05em;
+      transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+    }
+    .btn-explore:hover { background: var(--black); color: var(--white); }
+    .hero-divider {
+      border: none;
+      border-top: 1px solid #ddd;
+      margin: 24px 0;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+      animation-delay: 0.6s;
+    }
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 18px;
+      align-items: center;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.85rem;
+      color: var(--gray-mid);
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+      animation-delay: 0.65s;
+    }
+    .hero-pills a { color: var(--gray-mid); }
+    .hero-pills a:hover { color: var(--black); }
+    .hero-pills i { color: var(--yellow); margin-right: 4px; }
+    .pill-sep { color: #ccc; font-size: 0.7rem; }
+    .hero-panel {
+      position: relative;
+      background: var(--yellow);
+      border: 3px solid var(--black);
+      border-radius: 8px;
+      box-shadow: 8px 8px 0 var(--black);
+      padding: 40px 32px;
+      text-align: center;
+      overflow: hidden;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+      animation-delay: 0.4s;
+    }
+    .hero-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        rgba(0,0,0,0.04) 0px,
+        rgba(0,0,0,0.04) 1px,
+        transparent 1px,
+        transparent 8px
+      );
+      pointer-events: none;
+    }
+    .hero-panel img {
+      position: relative;
+      z-index: 1;
+      width: 200px;
+      margin: 0 auto 20px auto;
+    }
+    .hero-panel-name {
+      position: relative;
+      z-index: 1;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      color: var(--black);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .hero-panel-loc {
+      position: relative;
+      z-index: 1;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.8rem;
+      color: #333;
+      letter-spacing: 0.1em;
+    }
+
+    /* ─── STATS STRIP ─── */
+    #stats-strip {
+      background: var(--black);
+      padding: 40px 0;
+    }
+    .stats-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+    }
+    .stat-item {
+      flex: 1;
+      text-align: center;
+      padding: 0 3rem;
+    }
+    .stat-item + .stat-item { border-left: 1px solid #333; }
+    .stat-number {
+      display: block;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 2.8rem;
+      color: var(--yellow);
+      line-height: 1;
+    }
+    .stat-label {
+      display: block;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.75rem;
+      color: #aaa;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+
+    /* ─── FEATURE CARDS ─── */
+    #features {
+      background: var(--gray-light);
+      padding: 80px 0;
+    }
+    .features-heading {
+      text-align: center;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 2rem;
+      color: var(--black);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .features-sub {
+      text-align: center;
+      font-family: 'Lato', sans-serif;
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 48px;
+    }
+    .feature-cards {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 24px;
+    }
+    .feature-card {
+      background: var(--white);
+      border: 2px solid var(--black);
+      border-radius: 6px;
+      box-shadow: 5px 5px 0 var(--black);
+      padding: 0 28px 32px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s;
+    }
+    .feature-card:hover { transform: translateY(-4px); }
+    .feature-card-top {
+      height: 6px;
+      background: var(--yellow);
+      border-radius: 4px 4px 0 0;
+      margin: 0 -28px 0;
+      width: calc(100% + 56px);
+      flex-shrink: 0;
+    }
+    .feature-card-icon {
+      font-size: 2.2rem;
+      text-align: center;
+      margin: 20px 0 12px;
+    }
+    .feature-card h3 {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--black);
+      text-align: center;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .feature-card p {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.9rem;
+      color: var(--gray-mid);
+      line-height: 1.6;
+      text-align: center;
+      flex: 1;
+    }
+    .feature-card-link {
+      display: block;
+      text-align: center;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--yellow);
+      margin-top: 20px;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .feature-card-link:hover { color: var(--black); }
+
+    /* ─── SHARED SECTION HEADINGS ─── */
+    .sec-heading {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 2rem;
+      color: var(--black);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .sec-sub {
+      font-family: 'Lato', sans-serif;
+      font-size: 1rem;
+      color: var(--gray-mid);
+      margin-bottom: 40px;
+    }
+    .sec-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      color: var(--yellow);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    /* ─── CLASSES ─── */
+    #classes {
+      background: var(--white);
+      padding: 80px 0;
+    }
+
+    /* schedule */
+    .schedule-table { margin-bottom: 48px; }
+    .schedule-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      border-bottom: 1px solid #eee;
+      padding: 14px 0;
+      gap: 1rem;
+    }
+    .schedule-row.has-class {
+      border-left: 4px solid var(--yellow);
+      padding-left: 12px;
+    }
+    .schedule-day {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--black);
+      min-width: 120px;
+      flex-shrink: 0;
+    }
+    .schedule-class-info {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.95rem;
+      color: var(--gray-mid);
+      text-align: right;
+      line-height: 1.6;
+    }
+    .schedule-class-info .class-tag {
+      display: inline-block;
+      background: #fffbe0;
+      border: 1px solid var(--yellow);
+      color: var(--black);
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 2px 8px;
+      border-radius: 3px;
+      margin-left: 6px;
+    }
+    .open-room { color: #bbb; font-style: italic; }
+
+    /* classes offered cards */
+    .classes-offered-heading {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: var(--black);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .class-cards {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 24px;
+    }
+    .class-card {
+      background: var(--white);
+      border: 2px solid var(--black);
+      border-radius: 6px;
+      box-shadow: 4px 4px 0 var(--black);
+      padding: 0 24px 28px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s;
+    }
+    .class-card:hover { transform: translateY(-4px); }
+    .class-card-top {
+      height: 6px;
+      background: var(--yellow);
+      border-radius: 4px 4px 0 0;
+      margin: 0 -24px 0;
+      width: calc(100% + 48px);
+      flex-shrink: 0;
+    }
+    .class-card-icon {
+      font-size: 2.2rem;
+      text-align: center;
+      margin: 20px 0 10px;
+    }
+    .class-card h3 {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--black);
+      text-align: center;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    .class-card p {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.9rem;
+      color: var(--gray-mid);
+      line-height: 1.6;
+      text-align: center;
+      flex: 1;
+    }
+
+    /* ─── PRICES ─── */
+    #prices {
+      background: var(--gray-light);
+      padding: 80px 0;
+    }
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    .pricing-card {
+      background: var(--white);
+      border: 2px solid var(--black);
+      border-radius: 6px;
+      box-shadow: 5px 5px 0 var(--black);
+      padding: 0 28px 32px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+    .pricing-card.featured {
+      background: var(--yellow);
+    }
+    .pricing-card-top {
+      height: 6px;
+      background: var(--yellow);
+      border-radius: 4px 4px 0 0;
+      margin: 0 -28px 0;
+      width: calc(100% + 56px);
+      flex-shrink: 0;
+    }
+    .pricing-card.featured .pricing-card-top {
+      background: var(--black);
+    }
+    .pricing-card-title {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--black);
+      text-transform: uppercase;
+      margin: 20px 0 16px;
+    }
+    .price-list {
+      list-style: none;
+      margin-bottom: 20px;
+    }
+    .price-list li {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.95rem;
+      color: var(--black);
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .price-list li:last-child { border-bottom: none; }
+    .price-amount {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--black);
+      flex-shrink: 0;
+    }
+    .price-desc {
+      font-size: 0.85rem;
+      color: #555;
+    }
+    .pricing-card.featured .price-desc { color: #333; }
+    .pricing-divider {
+      border: none;
+      border-top: 1px solid rgba(0,0,0,0.12);
+      margin: 16px 0;
+    }
+    .perks-list { list-style: none; flex: 1; }
+    .perks-list li {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.9rem;
+      color: var(--gray-mid);
+      padding: 4px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pricing-card.featured .perks-list li { color: #333; }
+    .perks-list li::before {
+      content: '✓';
+      font-weight: 700;
+      color: var(--black);
+      flex-shrink: 0;
+    }
+    .pricing-card.featured .perks-list li::before { color: var(--black); }
+
+    /* family note */
+    .family-note {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.95rem;
+      color: var(--gray-mid);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+
+    /* tanning + insurance boxes */
+    .pricing-sub-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    .pricing-sub-box {
+      border: 2px solid var(--black);
+      border-radius: 6px;
+      padding: 24px;
+      background: var(--white);
+    }
+    .pricing-sub-box h4 {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--black);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--yellow);
+    }
+    .pricing-sub-box ul { list-style: none; }
+    .pricing-sub-box ul li {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.9rem;
+      color: var(--gray-mid);
+      padding: 4px 0;
+    }
+    .pricing-sub-box ul li strong {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      color: var(--black);
+    }
+    .pricing-sub-box p {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.9rem;
+      color: var(--gray-mid);
+      line-height: 1.6;
+    }
+
+    /* CTA join banner */
+    .pricing-join-banner {
+      background: var(--yellow);
+      border: 2px solid var(--black);
+      border-radius: 6px;
+      padding: 32px;
+      text-align: center;
+      margin-bottom: 0;
+    }
+    .pricing-join-banner p {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--black);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    .btn-call {
+      display: inline-block;
+      background: var(--black);
+      color: var(--yellow);
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 12px 28px;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+    }
+    .btn-call:hover {
+      transform: translate(-2px,-2px);
+      box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
+    }
+
+    /* value props strip */
+    .value-props-strip {
+      background: var(--black);
+      padding: 48px 0;
+      margin-top: 48px;
+    }
+    .value-props-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+    }
+    .value-prop-item {
+      flex: 1;
+      text-align: center;
+      padding: 0 2.5rem;
+    }
+    .value-prop-item + .value-prop-item { border-left: 1px solid #2a2a2a; }
+    .value-prop-number {
+      display: block;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 2rem;
+      color: var(--yellow);
+      line-height: 1.1;
+    }
+    .value-prop-label {
+      display: block;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.75rem;
+      color: #aaa;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    /* ─── DIRECTIONS ─── */
+    #directions {
+      background: var(--white);
+      padding: 80px 0;
+    }
+    .directions-map {
+      margin-bottom: 32px;
+    }
+    .directions-map iframe {
+      width: 100%;
+      height: 420px;
+      border: 3px solid var(--black);
+      border-radius: 6px;
+      box-shadow: 6px 6px 0 var(--black);
+      display: block;
+    }
+    .info-cards {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 20px;
+    }
+    .info-card {
+      border: 2px solid var(--black);
+      border-radius: 6px;
+      box-shadow: 3px 3px 0 var(--black);
+      padding: 24px 20px;
+      text-align: center;
+    }
+    .info-card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+    .info-card-title {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--black);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+    .info-card-detail {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.9rem;
+      color: var(--gray-mid);
+      line-height: 1.5;
+    }
+    .info-card-detail a {
+      color: var(--black);
+      font-weight: 700;
+      border-bottom: 2px solid var(--yellow);
+      padding-bottom: 1px;
+    }
+    .info-card-detail a:hover { color: #7a6000; }
+
+    /* ─── MISSION ─── */
+    #mission {
+      background: var(--gray-light);
+      padding: 80px 0;
+    }
+    .mission-inner {
+      display: grid;
+      grid-template-columns: 40% 60%;
+      gap: 4rem;
+      align-items: start;
+    }
+    .mission-left { display: flex; flex-direction: column; gap: 1.5rem; }
+    .mission-vert-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      color: var(--yellow);
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      align-self: flex-start;
+    }
+    .mission-heading-wrap {
+      border-left: 4px solid var(--yellow);
+      padding-left: 20px;
+    }
+    .mission-heading-wrap h2 {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 2.2rem;
+      color: var(--black);
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .mission-heading-wrap p {
+      font-family: 'Lato', sans-serif;
+      font-size: 1rem;
+      color: var(--gray-mid);
+      line-height: 1.8;
+    }
+    .mission-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    .mission-item {
+      display: flex;
+      gap: 10px;
+      align-items: baseline;
+      border-bottom: 1px solid #ddd;
+      padding: 12px 8px 12px 0;
+    }
+    .mission-num {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.8rem;
+      color: var(--yellow);
+      font-weight: 700;
+      flex-shrink: 0;
+      min-width: 24px;
+    }
+    .mission-text {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.95rem;
+      color: var(--black);
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    /* ─── CTA / JOIN ─── */
+    #how-to-join {
+      background: var(--yellow);
+      padding: 80px 40px;
+      text-align: center;
+    }
+    #how-to-join h2 {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 3rem;
+      color: var(--black);
+      text-transform: uppercase;
+    }
+    #how-to-join p {
+      font-family: 'Lato', sans-serif;
+      font-size: 1.1rem;
+      color: #333;
+      margin: 16px auto 32px;
+      max-width: 520px;
+    }
+    .btn-cta-big {
+      display: inline-block;
+      background: var(--black);
+      color: var(--yellow);
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 18px 48px;
+      border-radius: 4px;
+      box-shadow: 5px 5px 0 rgba(0,0,0,0.25);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn-cta-big:hover {
+      transform: translate(-2px,-2px);
+      box-shadow: 7px 7px 0 rgba(0,0,0,0.25);
+    }
+    .cta-phone {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.9rem;
+      color: #333;
+      margin-top: 20px;
+    }
+    .cta-phone a { color: #333; text-decoration: underline; }
+
+    /* ─── PLACEHOLDER SECTIONS ─── */
+    .placeholder-section {
+      background: var(--gray-light);
+      padding: 80px 0;
+      text-align: center;
+      border-top: 1px solid #e8e4de;
+    }
+    .placeholder-section h2 {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: var(--black);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .placeholder-section p {
+      font-family: 'Lato', sans-serif;
+      font-size: 1rem;
+      color: #888;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--black);
+      color: #aaa;
+      padding: 60px 0 0;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      gap: 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px 48px;
+    }
+    .footer-logo-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .footer-logo-mark {
+      background: var(--yellow);
+      color: var(--black);
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+    .footer-logo-text strong {
+      display: block;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 400;
+      font-size: 1rem;
+      color: var(--white);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .footer-logo-text small {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.7rem;
+      color: #555;
+      letter-spacing: 0.04em;
+    }
+    .footer-brand p {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.875rem;
+      line-height: 1.7;
+      color: #666;
+      margin-bottom: 14px;
+    }
+    .footer-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 8px;
+    }
+    .footer-contact-item i {
+      color: var(--yellow);
+      margin-top: 2px;
+      flex-shrink: 0;
+      width: 14px;
+    }
+    .footer-contact-item a { color: #888; transition: color 0.2s; }
+    .footer-contact-item a:hover { color: var(--yellow); }
+    .footer-col h4 {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--white);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.875rem;
+      color: #777;
+      transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: var(--yellow); }
+    .footer-hours-row {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+    .footer-hours-row span {
+      display: block;
+      font-weight: 700;
+      color: #999;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 2px;
+    }
+    .footer-bottom {
+      border-top: 1px solid #1e1e1e;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 40px;
+      text-align: center;
+    }
+    .footer-bottom p {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.75rem;
+      color: #444;
+    }
+
+    /* ─── HERO PILL BAR ─── */
+    .hero-pills-bar {
+      display: inline-flex;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+      animation-delay: 0.65s;
+    }
+    .hero-pill {
+      background: var(--black);
+      color: var(--yellow);
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.85rem;
+      padding: 8px 18px;
+      border: 1px solid #333;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+    .hero-pill:hover { background: #222; color: var(--yellow); }
+    .hero-pill:first-child { border-radius: 4px 0 0 4px; }
+    .hero-pill:last-child  { border-radius: 0 4px 4px 0; }
+    .hero-pill + .hero-pill { border-left: none; }
+
+    /* ─── SCHEDULE NOTE ─── */
+    .schedule-note {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.8rem;
+      color: #888;
+      font-style: italic;
+      margin-top: 12px;
+    }
+
+    /* ─── TAN SECTION ─── */
+    #tan {
+      background: var(--gray-light);
+      padding: 80px 0;
+      border-top: 1px solid #e8e4de;
+    }
+
+    /* ─── WHY FO FITNESS SECTION ─── */
+    #why-fo-fitness {
+      background: var(--white);
+      padding: 80px 0;
+      border-top: 1px solid #e8e4de;
+    }
+    .why-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    /* ─── MEAL SECTION ─── */
+    #meal-workout-plans {
+      background: var(--gray-light);
+      padding: 80px 0;
+      border-top: 1px solid #e8e4de;
+    }
+    .meal-subhead {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--yellow);
+      letter-spacing: 0.08em;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .meal-section-heading {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: var(--black);
+      margin-bottom: 24px;
+    }
+    .food-cols {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 0;
+    }
+    .food-col {
+      border: 2px solid var(--black);
+      border-radius: 6px;
+      box-shadow: 4px 4px 0 var(--black);
+      overflow: hidden;
+    }
+    .food-col-header {
+      color: white;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      padding: 10px;
+      text-align: center;
+    }
+    .food-col-body { padding: 14px; }
+    .food-tag {
+      background: var(--gray-light);
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 4px 10px;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.8rem;
+      display: inline-block;
+      margin: 3px;
+    }
+    .meal-facts-strip {
+      background: var(--black);
+      border-radius: 6px;
+      padding: 32px 40px;
+      margin: 40px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .meal-fact-left {
+      border-right: 1px solid #333;
+      padding-right: 40px;
+    }
+    .meal-fact-right {
+      padding-left: 40px;
+      text-align: center;
+    }
+    .meal-fact-number {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 2.5rem;
+      color: var(--yellow);
+      line-height: 1;
+    }
+    .meal-fact-label {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.75rem;
+      color: #aaa;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+    .meal-fact-sub {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.85rem;
+      color: #666;
+      margin-top: 8px;
+      max-width: 280px;
+    }
+    .meal-fact-icon { font-size: 2rem; margin-bottom: 8px; }
+    .meal-fact-tagline {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: white;
+    }
+    .meal-fact-punch {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--yellow);
+      margin-top: 4px;
+    }
+    .workout-section-heading {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: var(--black);
+      margin-bottom: 8px;
+    }
+    .workout-section-sub {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.9rem;
+      color: #888;
+      margin-bottom: 28px;
+    }
+    .workout-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .workout-card {
+      border: 2px solid var(--black);
+      box-shadow: 4px 4px 0 var(--black);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .workout-card-header {
+      background: var(--black);
+      color: var(--yellow);
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      padding: 12px 16px;
+    }
+    .workout-card-body {
+      background: white;
+      padding: 16px;
+    }
+    .workout-exercise-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #f0f0f0;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.85rem;
+      gap: 8px;
+    }
+    .workout-exercise-row:last-child { border-bottom: none; }
+    .workout-exercise-name { color: var(--black); flex: 1; }
+    .workout-exercise-sets { color: var(--gray-mid); white-space: nowrap; font-size: 0.78rem; }
+    .meal-plan-cta {
+      background: var(--yellow);
+      border: 2px solid var(--black);
+      border-radius: 6px;
+      padding: 28px;
+      text-align: center;
+      margin-top: 40px;
+    }
+    .meal-plan-cta-heading {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--black);
+    }
+    .meal-plan-cta-sub {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.9rem;
+      color: #333;
+      margin-top: 8px;
+    }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu ul li a { padding: 14px 20px; }
+
+      #hero {
+        padding: 140px 20px 60px;
+        min-height: auto;
+      }
+      .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-title { font-size: clamp(2.2rem, 8vw, 4rem); }
+      .hero-panel { max-width: 360px; margin: 32px auto 0; width: 100%; }
+      .hero-actions { flex-direction: column; }
+      .hero-actions a { width: 100%; justify-content: center; text-align: center; }
+      .btn-explore { justify-content: center; }
+
+      /* pill bar stacks on mobile */
+      .hero-pills-bar { flex-direction: column; width: 100%; }
+      .hero-pill {
+        border-radius: 4px !important;
+        border: 1px solid #333 !important;
+        width: 100%;
+        justify-content: center;
+      }
+      .hero-pill + .hero-pill { margin-top: 8px; border-left: 1px solid #333 !important; }
+
+      .stats-inner { flex-direction: column; padding: 0 20px; gap: 0; }
+      .stat-item {
+        border-left: none !important;
+        border-top: 1px solid #333;
+        padding: 24px 0;
+        width: 100%;
+      }
+      .stat-item:first-child { border-top: none; padding-top: 0; }
+
+      #features { padding: 48px 20px; }
+      .feature-cards { grid-template-columns: 1fr; }
+      .feature-card-top { margin: 0 -28px 0; width: calc(100% + 56px); }
+
+      #classes { padding: 48px 20px; }
+      .class-cards { grid-template-columns: 1fr; }
+      .class-card-top { margin: 0 -24px 0; width: calc(100% + 48px); }
+      .schedule-row { flex-direction: column; gap: 4px; }
+      .schedule-class-info { text-align: left; }
+
+      #prices { padding: 48px 20px; }
+      .pricing-cards { grid-template-columns: 1fr; }
+      .pricing-card-top { margin: 0 -28px 0; width: calc(100% + 56px); }
+      .pricing-sub-grid { grid-template-columns: 1fr; }
+      .value-props-inner { flex-direction: column; padding: 0 20px; gap: 0; }
+      .value-prop-item {
+        border-left: none !important;
+        border-top: 1px solid #2a2a2a;
+        padding: 20px 0;
+        width: 100%;
+      }
+      .value-prop-item:first-child { border-top: none; padding-top: 0; }
+
+      #directions { padding: 48px 20px; }
+      .directions-map iframe { height: 280px; }
+      .info-cards { grid-template-columns: 1fr; }
+
+      #mission { padding: 48px 20px; }
+      .mission-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .mission-vert-label { writing-mode: horizontal-tb; transform: none; }
+      .mission-grid { grid-template-columns: 1fr; }
+
+      #how-to-join { padding: 60px 20px; }
+      #how-to-join h2 { font-size: 2.2rem; }
+      .btn-cta-big { width: 100%; text-align: center; padding: 18px 32px; }
+
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; padding: 0 20px 40px; text-align: center; }
+      .footer-logo-row { justify-content: center; }
+      .footer-contact-item { justify-content: center; }
+      .footer-bottom { padding: 20px; }
+
+      #tan { padding: 48px 20px; }
+      #why-fo-fitness { padding: 48px 20px; }
+      .why-cards { grid-template-columns: 1fr; }
+      #meal-workout-plans { padding: 48px 20px; }
+      .food-cols { grid-template-columns: 1fr; }
+      .meal-facts-strip { flex-direction: column; padding: 32px 20px; }
+      .meal-fact-left { border-right: none; border-bottom: 1px solid #333; padding-right: 0; padding-bottom: 24px; margin-bottom: 24px; width: 100%; text-align: center; }
+      .meal-fact-sub { max-width: 100%; }
+      .meal-fact-right { padding-left: 0; text-align: center; }
+      .workout-cards { grid-template-columns: 1fr; }
+
+      .placeholder-section { padding: 48px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    <div class="nav-logo-mark">FO</div>
+    <div class="nav-logo-text">
+      <strong>Four Oaks Fitness</strong>
+      <small>Four Oaks, NC</small>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#prices">Prices</a></li>
+    <li><a href="#classes">Classes</a></li>
+    <li><a href="#supplements">Supplements</a></li>
+    <li><a href="#tan">Tan</a></li>
+    <li><a href="#directions">Directions</a></li>
+    <li><a href="#why-fo-fitness">Why FO Fitness?</a></li>
+    <li><a href="#meal-workout-plans">Meal &amp; Workout Plans</a></li>
+    <li><a href="#prices" class="nav-cta">Join Today</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#prices">Prices</a></li>
+    <li><a href="#classes">Classes</a></li>
+    <li><a href="#supplements">Supplements</a></li>
+    <li><a href="#tan">Tan</a></li>
+    <li><a href="#directions">Directions</a></li>
+    <li><a href="#why-fo-fitness">Why FO Fitness?</a></li>
+    <li><a href="#meal-workout-plans">Meal &amp; Workout Plans</a></li>
+    <li><a href="#prices">Join Today</a></li>
+  </ul>
+</div>
+
+<!-- ─── URGENCY BANNER ─── -->
+<div class="urgency-banner">
+  💪 No contracts. No nonsense. Just results. — <a href="#prices">JOIN TODAY →</a>
+</div>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-wrap">
+    <div class="hero-inner">
+
+      <div class="hero-content">
+        <div class="hero-label">Four Oaks, NC — Est. Local Gym</div>
+        <h1 class="hero-title">
+          Get Results.<br>Workout <span class="underline-accent">Local.</span>
+        </h1>
+        <p class="hero-sub">
+          Save gas. Save time. Four Oaks Fitness has everything you need — cardio, strength, classes, tanning, and supplements — right here in your community.
+        </p>
+        <div class="hero-actions">
+          <a href="#prices" class="btn-join">
+            <i class="fas fa-bolt"></i> Join Today
+          </a>
+          <a href="#features" class="btn-explore">
+            Explore the Gym
+          </a>
+        </div>
+        <hr class="hero-divider" />
+        <div class="hero-pills-bar">
+          <a href="tel:9199632583" class="hero-pill"><i class="fas fa-phone"></i> 919-963-2583</a>
+          <span class="hero-pill"><i class="fas fa-map-marker-alt"></i> 305 N. Main St, Four Oaks</span>
+          <span class="hero-pill"><i class="fas fa-clock"></i> Staff Mon–Fri 4–8 PM</span>
+        </div>
+      </div>
+
+      <div class="hero-panel">
+        <img src="./assets/logo.png" alt="Four Oaks Fitness Logo" style="width:200px;" />
+        <div class="hero-panel-name">Four Oaks Fitness</div>
+        <div class="hero-panel-loc">Four Oaks, NC</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── STATS STRIP ─── -->
+<section id="stats-strip">
+  <div class="stats-inner fade-in">
+    <div class="stat-item">
+      <span class="stat-number">200+</span>
+      <span class="stat-label">Members Strong</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">10+ Yrs</span>
+      <span class="stat-label">Serving Four Oaks</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">7 Days</span>
+      <span class="stat-label">A Week, Open For You</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FEATURE CARDS ─── -->
+<section id="features">
+  <div class="container">
+    <h2 class="features-heading fade-in">Everything You Need</h2>
+    <p class="features-sub fade-in">One gym. One community. All under one roof.</p>
+    <div class="feature-cards">
+
+      <div class="feature-card fade-in">
+        <div class="feature-card-top"></div>
+        <div class="feature-card-icon">🏃</div>
+        <h3>Cardio Equipment</h3>
+        <p>Treadmills, ellipticals, stepmills, stationary bikes, and a rowing machine — a full cardio floor built to keep you moving.</p>
+        <a href="#mission" class="feature-card-link">Learn More →</a>
+      </div>
+
+      <div class="feature-card fade-in">
+        <div class="feature-card-top"></div>
+        <div class="feature-card-icon">👥</div>
+        <h3>Group Classes</h3>
+        <p>Zumba, Pilates, and Refit sessions led by certified instructors. Included with every membership — no extra fees.</p>
+        <a href="#classes" class="feature-card-link">Learn More →</a>
+      </div>
+
+      <div class="feature-card fade-in">
+        <div class="feature-card-top"></div>
+        <div class="feature-card-icon">⚙️</div>
+        <h3>Supplements &amp; Tanning</h3>
+        <p>On-site supplement store plus laydown and standup tanning beds. Everything in one place, no extra trips.</p>
+        <a href="#supplements" class="feature-card-link">Learn More →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── CLASSES ─── -->
+<section id="classes">
+  <div class="container">
+
+    <h2 class="sec-heading fade-in">Classes</h2>
+
+    <!-- Weekly Schedule -->
+    <div class="sec-label fade-in">Weekly Schedule</div>
+    <div class="schedule-table fade-in">
+      <div class="schedule-row has-class">
+        <span class="schedule-day">Monday</span>
+        <span class="schedule-class-info">
+          Pilates <span class="class-tag">6:30 PM</span>
+        </span>
+      </div>
+      <div class="schedule-row has-class">
+        <span class="schedule-day">Tuesday</span>
+        <span class="schedule-class-info">
+          Refit <span class="class-tag">6:30 PM</span>
+        </span>
+      </div>
+      <div class="schedule-row has-class">
+        <span class="schedule-day">Thursday</span>
+        <span class="schedule-class-info">
+          Refit <span class="class-tag">8:30 AM</span><br>
+          Zumba <span class="class-tag">6:30 PM</span>
+        </span>
+      </div>
+    </div>
+    <p class="schedule-note">* Gym is open all week — classes run Monday, Tuesday &amp; Thursday.</p>
+
+    <!-- Classes Offered -->
+    <h3 class="classes-offered-heading fade-in">Classes Offered</h3>
+    <div class="class-cards">
+
+      <div class="class-card fade-in">
+        <div class="class-card-top"></div>
+        <div class="class-card-icon">💃</div>
+        <h3>Zumba</h3>
+        <p>Latin Beats Dance Class! High energy, fun, and open to all levels.</p>
+      </div>
+
+      <div class="class-card fade-in">
+        <div class="class-card-top"></div>
+        <div class="class-card-icon">🙏</div>
+        <h3>Refit</h3>
+        <p>American dance fitness with spiritual motivation to improve overall wellbeing.</p>
+      </div>
+
+      <div class="class-card fade-in">
+        <div class="class-card-top"></div>
+        <div class="class-card-icon">🧘</div>
+        <h3>Pilates</h3>
+        <p>45 minutes of posing and stretching designed to stretch and relax the mind and body.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── PRICES ─── -->
+<section id="prices">
+  <div class="container">
+
+    <h2 class="sec-heading fade-in">Get Started Today</h2>
+    <p class="sec-sub fade-in">Simple pricing. No tricks.</p>
+
+    <!-- Pricing Cards -->
+    <div class="pricing-cards">
+
+      <!-- Individual -->
+      <div class="pricing-card fade-in">
+        <div class="pricing-card-top"></div>
+        <div class="pricing-card-title">1 Member</div>
+        <ul class="price-list">
+          <li>
+            <span class="price-amount">$27<small>/mo</small></span>
+            <span class="price-desc">Bank or card draft</span>
+          </li>
+          <li>
+            <span class="price-amount">$30<small>/mo</small></span>
+            <span class="price-desc">Pay by the month</span>
+          </li>
+          <li>
+            <span class="price-amount">$27<small>/mo</small></span>
+            <span class="price-desc">Students, teachers, fire &amp; police</span>
+          </li>
+        </ul>
+        <hr class="pricing-divider" />
+        <ul class="perks-list">
+          <li>No enrollment fees</li>
+          <li>No cleaning fees</li>
+          <li>No exit fees</li>
+          <li>Credit cards, checks &amp; cash accepted</li>
+        </ul>
+      </div>
+
+      <!-- Couples — featured -->
+      <div class="pricing-card featured fade-in">
+        <div class="pricing-card-top"></div>
+        <div class="pricing-card-title">Couples</div>
+        <ul class="price-list">
+          <li>
+            <span class="price-amount">$45<small>/mo</small></span>
+            <span class="price-desc">Bank or card draft</span>
+          </li>
+          <li>
+            <span class="price-amount">$50<small>/mo</small></span>
+            <span class="price-desc">Pay by the month</span>
+          </li>
+        </ul>
+        <hr class="pricing-divider" />
+        <ul class="perks-list">
+          <li>No enrollment fees</li>
+          <li>No cleaning fees</li>
+          <li>No exit fees</li>
+          <li>Credit cards, checks &amp; cash accepted</li>
+        </ul>
+      </div>
+
+      <!-- Family -->
+      <div class="pricing-card fade-in">
+        <div class="pricing-card-top"></div>
+        <div class="pricing-card-title">Family</div>
+        <p class="family-note">Add $10 to the couples rate for each additional household member.</p>
+        <hr class="pricing-divider" />
+        <ul class="perks-list">
+          <li>No enrollment fees</li>
+          <li>No cleaning fees</li>
+          <li>No exit fees</li>
+          <li>Credit cards, checks &amp; cash accepted</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Tanning + Insurance -->
+    <div class="pricing-sub-grid fade-in">
+      <div class="pricing-sub-box">
+        <h4>Tanning</h4>
+        <ul>
+          <li><strong>$30/mo</strong> per person</li>
+          <li><strong>$25/mo</strong> add-on for gym members</li>
+        </ul>
+      </div>
+      <div class="pricing-sub-box">
+        <h4>Insurance Accepted</h4>
+        <p>We accept Silver Sneakers, Tivity Health, Active &amp; Fit, Aaptiv, and One Pass. Check with your insurance company to see if you qualify.</p>
+      </div>
+    </div>
+
+    <!-- Join Banner -->
+    <div class="pricing-join-banner fade-in">
+      <p>TO JOIN: Visit us at 305 N. Main St any evening Monday–Friday 4–8 PM or call 919-963-2583</p>
+      <a href="tel:9199632583" class="btn-call">Call Now</a>
+    </div>
+
+  </div>
+
+  <!-- Value Props Strip -->
+  <div class="value-props-strip">
+    <div class="value-props-inner fade-in">
+      <div class="value-prop-item">
+        <span class="value-prop-number">12</span>
+        <span class="value-prop-label">Gym Visits / Month Avg</span>
+      </div>
+      <div class="value-prop-item">
+        <span class="value-prop-number">$60</span>
+        <span class="value-prop-label">Saved / Month in Gas</span>
+      </div>
+      <div class="value-prop-item">
+        <span class="value-prop-number">6 Hrs</span>
+        <span class="value-prop-label">Saved in Travel Time</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DIRECTIONS ─── -->
+<section id="directions">
+  <div class="container">
+
+    <h2 class="sec-heading fade-in">Find Us</h2>
+    <p class="sec-sub fade-in">305 N. Main St, Four Oaks, NC 27524</p>
+
+    <div class="directions-map fade-in">
+      <iframe
+        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFG2nY&q=305+N+Main+St,+Four+Oaks,+NC+27524"
+        allowfullscreen
+        loading="lazy"
+        title="Four Oaks Fitness location map">
+      </iframe>
+    </div>
+
+    <div class="info-cards fade-in">
+      <div class="info-card">
+        <div class="info-card-icon">📍</div>
+        <div class="info-card-title">Address</div>
+        <div class="info-card-detail">305 N. Main St<br>Four Oaks, NC 27524</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">🕐</div>
+        <div class="info-card-title">Hours</div>
+        <div class="info-card-detail">Staff on duty<br>Mon–Fri 4:00–8:00 PM</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">📞</div>
+        <div class="info-card-title">Phone</div>
+        <div class="info-card-detail"><a href="tel:9199632583">919-963-2583</a></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── MISSION ─── -->
+<section id="mission">
+  <div class="container">
+    <div class="mission-inner">
+
+      <div class="mission-left fade-in">
+        <div class="mission-vert-label">Our Mission</div>
+        <div class="mission-heading-wrap">
+          <h2>What We Do For You</h2>
+          <p>We're more than a gym. We're a local community dedicated to helping every member look, feel, and perform their best.</p>
+        </div>
+      </div>
+
+      <div class="mission-grid fade-in">
+        <div class="mission-item">
+          <span class="mission-num">01</span>
+          <span class="mission-text">Help You Lose Fat</span>
+        </div>
+        <div class="mission-item">
+          <span class="mission-num">02</span>
+          <span class="mission-text">Relax &amp; Get Away</span>
+        </div>
+        <div class="mission-item">
+          <span class="mission-num">03</span>
+          <span class="mission-text">Build Muscle</span>
+        </div>
+        <div class="mission-item">
+          <span class="mission-num">04</span>
+          <span class="mission-text">Become Happier</span>
+        </div>
+        <div class="mission-item">
+          <span class="mission-num">05</span>
+          <span class="mission-text">Feel Better</span>
+        </div>
+        <div class="mission-item">
+          <span class="mission-num">06</span>
+          <span class="mission-text">Make Friends</span>
+        </div>
+        <div class="mission-item">
+          <span class="mission-num">07</span>
+          <span class="mission-text">Become Healthier</span>
+        </div>
+        <div class="mission-item">
+          <span class="mission-num">08</span>
+          <span class="mission-text">Perform Better</span>
+        </div>
+        <div class="mission-item">
+          <span class="mission-num">09</span>
+          <span class="mission-text">Look Better</span>
+        </div>
+        <div class="mission-item">
+          <span class="mission-num">10</span>
+          <span class="mission-text">Get Ready for Events, Weddings &amp; Vacations</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── PLACEHOLDER SECTIONS ─── -->
+<section id="supplements" class="placeholder-section">
+  <h2>Supplements</h2>
+  <p>Pre-workouts, protein, vitamins, creatine, BCAAs, and more — available on site.</p>
+</section>
+
+<section id="tan">
+  <div class="container">
+    <h2 class="sec-heading fade-in">Tanning</h2>
+    <p class="sec-sub fade-in">Laydown and standup tanning beds — get your glow year-round.</p>
+    <div class="feature-cards">
+
+      <div class="feature-card fade-in">
+        <div class="feature-card-top"></div>
+        <div class="feature-card-icon">🛏️</div>
+        <h3>Lay Down Beds</h3>
+        <p>Classic lay-down tanning beds for a deep, even base tan. Comfortable and easy to use — great for all skin types.</p>
+      </div>
+
+      <div class="feature-card fade-in">
+        <div class="feature-card-top"></div>
+        <div class="feature-card-icon">🧍</div>
+        <h3>Stand Up Beds</h3>
+        <p>Full-body exposure in less time. Stand-up booths deliver a quick, consistent tan without pressure points.</p>
+      </div>
+
+      <div class="feature-card fade-in">
+        <div class="feature-card-top"></div>
+        <div class="feature-card-icon">💳</div>
+        <h3>Membership Add-On</h3>
+        <p>Unlimited tanning available as an add-on. <strong>$25/mo</strong> for gym members · <strong>$30/mo</strong> standalone tanning membership.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="why-fo-fitness">
+  <div class="container">
+    <h2 class="sec-heading fade-in">Why FO Fitness?</h2>
+    <p class="sec-sub fade-in">A welcoming, non-intimidating gym where everyone knows your name.</p>
+    <div class="why-cards fade-in">
+
+      <div class="feature-card">
+        <div class="feature-card-top"></div>
+        <div class="feature-card-icon">💪</div>
+        <h3>No Contracts</h3>
+        <p>Month-to-month membership — no lock-ins, no cancellation fees. Stay because you love it, not because you're stuck.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-card-top"></div>
+        <div class="feature-card-icon">🏘️</div>
+        <h3>Community Gym</h3>
+        <p>We know your name. A small-town gym with a tight-knit community where members genuinely support each other.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-card-top"></div>
+        <div class="feature-card-icon">💰</div>
+        <h3>Affordable</h3>
+        <p>Full gym access for just <strong>$27/mo</strong>. No hidden fees, no surprise charges — just straightforward membership pricing.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-card-top"></div>
+        <div class="feature-card-icon">📍</div>
+        <h3>Workout Local</h3>
+        <p>Right here in Four Oaks. Keep your fitness dollars in your community and skip the 30-minute commute to the big-box gym.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="meal-workout-plans">
+  <div class="container">
+    <h2 class="sec-heading fade-in">Meal &amp; Workout Plans</h2>
+    <p class="meal-subhead fade-in">Train right. Eat right. Do it faster.</p>
+
+    <!-- PART 1: NUTRITION GUIDE -->
+    <h3 class="meal-section-heading fade-in">Foods to Eat</h3>
+    <div class="food-cols fade-in">
+
+      <div class="food-col">
+        <div class="food-col-header" style="background:#4CAF50;">FOODS TO EAT BEFORE WORKOUT</div>
+        <div class="food-col-body">
+          <span class="food-tag">Smoothies</span>
+          <span class="food-tag">Oatmeal with Fresh Fruits</span>
+          <span class="food-tag">Egg Whites</span>
+          <span class="food-tag">Egg Scramble</span>
+          <span class="food-tag">Banana-Peanut Butter Toast</span>
+          <span class="food-tag">Hearty Salad</span>
+          <span class="food-tag">Yogurt with Whole Grain Cereal</span>
+          <span class="food-tag">Granola Bar</span>
+          <span class="food-tag">Black Coffee</span>
+          <span class="food-tag">Hummus &amp; Pita</span>
+          <span class="food-tag">Salmon &amp; Tuna</span>
+        </div>
+      </div>
+
+      <div class="food-col">
+        <div class="food-col-header" style="background:#2196F3;">FOODS TO EAT AFTER WORKOUT</div>
+        <div class="food-col-body">
+          <span class="food-tag">Whey Protein</span>
+          <span class="food-tag">Avocado Toast</span>
+          <span class="food-tag">Oatmeal</span>
+          <span class="food-tag">Berries</span>
+          <span class="food-tag">Lean Meat</span>
+          <span class="food-tag">Protein Bar</span>
+          <span class="food-tag">Cottage Cheese &amp; Fruit</span>
+          <span class="food-tag">Greek Yogurt with Fruit</span>
+          <span class="food-tag">Nuts</span>
+          <span class="food-tag">Green Tea</span>
+          <span class="food-tag">Whole Grains</span>
+          <span class="food-tag">Eggs</span>
+          <span class="food-tag">Green Veggies</span>
+        </div>
+      </div>
+
+      <div class="food-col">
+        <div class="food-col-header" style="background:#FF5722;">FOODS TO EAT TO BURN BELLY FAT</div>
+        <div class="food-col-body">
+          <span class="food-tag">Whey Protein</span>
+          <span class="food-tag">Avocado Toast</span>
+          <span class="food-tag">Oatmeal</span>
+          <span class="food-tag">Berries</span>
+          <span class="food-tag">Lean Meat</span>
+          <span class="food-tag">Protein Bar</span>
+          <span class="food-tag">Cottage Cheese &amp; Fruit</span>
+          <span class="food-tag">Greek Yogurt with Fruit</span>
+          <span class="food-tag">Nuts</span>
+          <span class="food-tag">Green Tea</span>
+          <span class="food-tag">Whole Grains</span>
+          <span class="food-tag">Eggs</span>
+          <span class="food-tag">Green Veggies</span>
+          <span class="food-tag">Dried Fruits &amp; Nuts</span>
+          <span class="food-tag">Apple &amp; Peanut Butter</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PART 2: FITNESS FACTS STRIP -->
+    <div class="meal-facts-strip fade-in">
+      <div class="meal-fact-left">
+        <div class="meal-fact-number">3,500</div>
+        <div class="meal-fact-label">Calories = 1 LB of Fat</div>
+        <div class="meal-fact-sub">Burn 500 calories/day more than you eat to lose 1 lb per week.</div>
+      </div>
+      <div class="meal-fact-right">
+        <div class="meal-fact-icon">🛑</div>
+        <div class="meal-fact-tagline">THE REAL WORKOUT STARTS</div>
+        <div class="meal-fact-punch">...when you want to STOP.</div>
+      </div>
+    </div>
+
+    <!-- PART 3: SAMPLE WORKOUT PLAN -->
+    <h3 class="workout-section-heading fade-in">Sample Workout Plan</h3>
+    <p class="workout-section-sub fade-in">German Volume Training Phase 1 — Revised</p>
+    <div class="workout-cards fade-in">
+
+      <div class="workout-card">
+        <div class="workout-card-header">DAY 1: CHEST, BACK &amp; TRAPS</div>
+        <div class="workout-card-body">
+          <div class="workout-exercise-row">
+            <span class="workout-exercise-name">Decline Dumbbell Bench Press</span>
+            <span class="workout-exercise-sets">10 × 40-2U · 90s rest</span>
+          </div>
+          <div class="workout-exercise-row">
+            <span class="workout-exercise-name">Wide-Grip Pull-Ups</span>
+            <span class="workout-exercise-sets">10 × 40-2U · 90s rest</span>
+          </div>
+          <div class="workout-exercise-row">
+            <span class="workout-exercise-name">Incline Dumbbell Flies</span>
+            <span class="workout-exercise-sets">3 × 30-2U · 60s rest</span>
+          </div>
+          <div class="workout-exercise-row">
+            <span class="workout-exercise-name">Supinated Barbell Rows</span>
+            <span class="workout-exercise-sets">3 × 30-2U · 60s rest</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="workout-card">
+        <div class="workout-card-header">DAY 2: LEGS &amp; ABS</div>
+        <div class="workout-card-body">
+          <div class="workout-exercise-row">
+            <span class="workout-exercise-name">Barbell Back Squats</span>
+            <span class="workout-exercise-sets">10 × 40-2U · 90s rest</span>
+          </div>
+          <div class="workout-exercise-row">
+            <span class="workout-exercise-name">Romanian Deadlifts</span>
+            <span class="workout-exercise-sets">10 × 40-2U · 90s rest</span>
+          </div>
+          <div class="workout-exercise-row">
+            <span class="workout-exercise-name">Seating Pull-Ins</span>
+            <span class="workout-exercise-sets">3 × 20-2U · 60s rest</span>
+          </div>
+          <div class="workout-exercise-row">
+            <span class="workout-exercise-name">Standing Calf Raises</span>
+            <span class="workout-exercise-sets">3 × 20-2U · 60s rest</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="workout-card">
+        <div class="workout-card-header">DAY 4: ARMS &amp; SHOULDERS</div>
+        <div class="workout-card-body">
+          <div class="workout-exercise-row">
+            <span class="workout-exercise-name">Tricep Dips</span>
+            <span class="workout-exercise-sets">10 × 40-2U · 90s rest</span>
+          </div>
+          <div class="workout-exercise-row">
+            <span class="workout-exercise-name">Incline Hammer Curls</span>
+            <span class="workout-exercise-sets">10 × 40-2U · 90s rest</span>
+          </div>
+          <div class="workout-exercise-row">
+            <span class="workout-exercise-name">Seated Military Press</span>
+            <span class="workout-exercise-sets">10 × 20-2U · 60s rest</span>
+          </div>
+          <div class="workout-exercise-row">
+            <span class="workout-exercise-name">Seated Lateral Raises</span>
+            <span class="workout-exercise-sets">3 × 20-2U · 60s rest</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="meal-plan-cta fade-in">
+      <div class="meal-plan-cta-heading">Want a personalized plan? Come see us.</div>
+      <div class="meal-plan-cta-sub">Visit 305 N. Main St · Mon–Fri 4–8 PM · 919-963-2583</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── CTA / JOIN ─── -->
+<section id="how-to-join">
+  <div class="fade-in">
+    <h2>Ready to Start?</h2>
+    <p>Join Four Oaks Fitness today — no contracts, no nonsense.</p>
+    <a href="#prices" class="btn-cta-big">Join Today</a>
+    <div class="cta-phone">📞 Call us: <a href="tel:9199632583">919-963-2583</a></div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo-row">
+        <div class="footer-logo-mark">FO</div>
+        <div class="footer-logo-text">
+          <strong>Four Oaks Fitness</strong>
+          <small>Four Oaks, NC</small>
+        </div>
+      </div>
+      <p>A local, community-driven fitness center in Four Oaks, NC. Everything you need to reach your goals — without the big-box commute.</p>
+      <div class="footer-contact-item">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>305 N. Main Street, Four Oaks, NC 27524</span>
+      </div>
+      <div class="footer-contact-item">
+        <i class="fas fa-phone"></i>
+        <a href="tel:9199632583">919-963-2583</a>
+      </div>
+      <div class="footer-contact-item">
+        <i class="fas fa-envelope"></i>
+        <a href="mailto:davycjohnson@yahoo.com">davycjohnson@yahoo.com</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#prices">Membership Prices</a></li>
+        <li><a href="#classes">Group Classes</a></li>
+        <li><a href="#supplements">Supplement Store</a></li>
+        <li><a href="#tan">Tanning</a></li>
+        <li><a href="#directions">Directions &amp; Map</a></li>
+        <li><a href="#why-fo-fitness">Why FO Fitness?</a></li>
+        <li><a href="#meal-workout-plans">Meal &amp; Workout Plans</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Hours</h4>
+      <div class="footer-hours-row">
+        <span>Staffed Hours</span>
+        Monday – Friday: 4:00 PM – 8:00 PM
+      </div>
+      <div class="footer-hours-row">
+        <span>Saturday &amp; Sunday</span>
+        Staff not on-site
+      </div>
+      <div class="footer-hours-row">
+        <span>24/7 Key Fob Access</span>
+        Members can access any time, every day of the year.
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 Four Oaks Fitness Center &middot; 305 N. Main St, Four Oaks, NC &middot; 919-963-2583</p>
+  </div>
+</footer>
+
+<script>
+  /* Hamburger — close on outside click or link click */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+    mobileMenu.addEventListener('click', e => {
+      if (e.target.tagName === 'A') mobileMenu.classList.remove('open');
+    });
+    document.addEventListener('click', e => {
+      if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+        mobileMenu.classList.remove('open');
+      }
+    });
+  }
+
+  /* Scroll fade-in — skip hero elements (CSS-animated) */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      } else {
+        entry.target.classList.remove('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => {
+    if (!el.closest('#hero')) io.observe(el);
+  });
+</script>
+</body>
+</html>
